@@ -1,6 +1,6 @@
 import React from "react";
 import { useSetRecoilState } from "recoil";
-import { IToDo } from "./atoms";
+import { Categories, IToDo } from "./atoms";
 import { toDoState } from "./atoms";
 
 function ToDo({ text, category, id }: IToDo) {
@@ -32,18 +32,18 @@ function ToDo({ text, category, id }: IToDo) {
     <li>
       <span>{text}</span>
       {/* 카테고리가 DOING이 아니면 Doing 버튼을 보여준다. && 둘다 true이여야 함 */}
-      {category !== "DOING" && (
-        <button name="DOING" onClick={onClick}>
+      {category !== Categories.DOING && (
+        <button name={Categories.DOING + ""} onClick={onClick}>
           Doing
         </button>
       )}
-      {category !== "TO_DO" && (
-        <button name="TO_DO" onClick={onClick}>
+      {category !== Categories.TO_DO && (
+        <button name={Categories.TO_DO + ""} onClick={onClick}>
           To Do
         </button>
       )}
-      {category !== "DONE" && (
-        <button name="DONE" onClick={onClick}>
+      {category !== Categories.DONE && (
+        <button name={Categories.DONE + ""} onClick={onClick}>
           Done
         </button>
       )}

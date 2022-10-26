@@ -1,10 +1,16 @@
 import { atom, selector } from "recoil";
 
+export enum Categories {
+  "TO_DO",
+  "DOING",
+  "DONE",
+}
+
 export interface IToDo {
   //toDo가 어떻게 생긴지를 알려줄 인터페이스
   text: string;
   id: number;
-  category: "TO_DO" | "DOING" | "DONE"; //3가지 옵션
+  category: Categories; //3가지 옵션
 }
 
 //  toDos는 IToDo 객체로 이뤄진 배열이다
@@ -15,6 +21,7 @@ export const toDoState = atom<IToDo[]>({
 });
 
 export const toDoSelector = selector({
+  //select를 클릭하면 해당하는 카테고리 보여주는 상태관리
   key: "toDoSelector",
   get: ({ get }) => {
     const toDos = get(toDoState); //toDoState atom을 받자
@@ -23,7 +30,7 @@ export const toDoSelector = selector({
   },
 });
 
-export const categoryState = atom({
+export const categoryState = atom<Categories>({
   key: "category",
-  default: "TO_DO",
+  default: Categories.TO_DO,
 });
