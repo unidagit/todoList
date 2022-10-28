@@ -1,7 +1,7 @@
 import React from "react";
 import { useSetRecoilState } from "recoil";
-import { Categories, IToDo } from "./atoms";
-import { toDoState } from "./atoms";
+import { Categories, IToDo } from "../atoms";
+import { toDoState } from "../atoms";
 
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
@@ -17,13 +17,22 @@ function ToDo({ text, category, id }: IToDo) {
       //findIndex안에서는 조건을 만족하는 todo의 index를 찾아줄것이다
       //toDo의 id와 props에서 오는 id가 같은지 비교하면된다
       console.log(targetIndex);
-      const oldToDo = oldToDos[targetIndex];
+      // const oldToDo = oldToDos[targetIndex];
       const newToDo = { text, id, category: name as any }; //클릭된 버튼의 카테고리를 가져야한다
-      console.log(oldToDo, newToDo);
+      // console.log(oldToDo, newToDo);
       return [
         ...oldToDos.slice(0, targetIndex),
         newToDo,
         ...oldToDos.slice(targetIndex + 1),
+      ];
+    });
+  };
+  const deleteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setToDos((oldToDos) => {
+      const findIndex = oldToDos.findIndex((todo) => todo.id === id);
+      return [
+        ...oldToDos.slice(0, findIndex),
+        ...oldToDos.slice(findIndex + 1),
       ];
     });
   };
@@ -47,6 +56,10 @@ function ToDo({ text, category, id }: IToDo) {
           Done
         </button>
       )}
+
+      <button name={Categories.DELETE} onClick={deleteClick}>
+        Delete
+      </button>
     </li>
   );
 }

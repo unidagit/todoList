@@ -1,9 +1,12 @@
 import { atom, selector } from "recoil";
 
+export const USERTODOLIST_KEY = "todos";
+
 export enum Categories {
-  "TO_DO",
-  "DOING",
-  "DONE",
+  "TO_DO" = "TO_DO",
+  "DOING" = "DOING",
+  "DONE" = "DONE",
+  "DELETE" = "DELETE",
 }
 
 export interface IToDo {
@@ -13,11 +16,14 @@ export interface IToDo {
   category: Categories; //3가지 옵션
 }
 
+const userGetTodo = localStorage.getItem(USERTODOLIST_KEY);
+const parseTodo = JSON.parse(userGetTodo as string);
+
 //  toDos는 IToDo 객체로 이뤄진 배열이다
 export const toDoState = atom<IToDo[]>({
   //toDoState는 toDo의 배열들.
   key: "toDo",
-  default: [],
+  default: userGetTodo !== null ? parseTodo : [],
 });
 
 export const toDoSelector = selector({
