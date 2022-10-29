@@ -1,6 +1,32 @@
 import { useForm } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import styled from "styled-components";
 import { categoryState, toDoState, USERTODOLIST_KEY } from "../atoms";
+
+const TodoForm = styled.form`
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  background-color: white;
+  border-radius: 5rem;
+  height: 30px;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  padding: 0.8rem;
+`;
+
+const Button = styled.button`
+  padding: 0.8rem;
+  border: none;
+  background-color: transparent;
+  color: ${(props) => props.theme.accentColor};
+  font-size: 1rem;
+`;
 
 interface IForm {
   //form의 인터페이스
@@ -22,15 +48,15 @@ function CreateToDo() {
   };
   localStorage.setItem(USERTODOLIST_KEY, JSON.stringify(toDosSave));
   return (
-    <form onSubmit={handleSubmit(handleValid)}>
-      <input
+    <TodoForm onSubmit={handleSubmit(handleValid)}>
+      <Input
         {...register("toDo", {
           required: "할일을 써주세요",
         })}
         placeholder="Write a to do"
       />
-      <button>Add</button>
-    </form>
+      <Button>Add</Button>
+    </TodoForm>
   );
 }
 

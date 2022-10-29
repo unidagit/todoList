@@ -60,6 +60,10 @@ a {
   text-decoration:none;
   color:inherit; //부모한테 색상가져와
 }
+
+
+
+
 `;
 
 export default GlobalStyle;

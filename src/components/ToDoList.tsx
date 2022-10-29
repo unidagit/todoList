@@ -7,18 +7,17 @@ import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
 
 const Container = styled.div`
-  padding: 0 2rem;
+  padding: 3rem;
   max-width: 30rem;
   margin: 10rem auto;
-
-  hr {
-    margin: 2rem auto;
-  }
+  border: 0.5px solid white;
+  border-radius: 1rem;
 `;
 
 const Title = styled.h1`
   font-size: 2rem;
   text-align: center;
+  margin-bottom: 50px;
 `;
 
 function ToDoList() {
@@ -28,8 +27,8 @@ function ToDoList() {
 
   return (
     <Container>
-      <Title>To Dos</Title>
-      <hr />
+      <Title>오늘의 할일</Title>
+
       <CategoryList />
       <CreateToDo />
       {toDos?.map((toDo) => (

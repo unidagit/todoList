@@ -1,7 +1,36 @@
 import React from "react";
 import { useSetRecoilState } from "recoil";
+import styled from "styled-components";
 import { Categories, IToDo } from "../atoms";
 import { toDoState } from "../atoms";
+
+const ToDoLi = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  /* background-color: blue; */
+  padding: 0 0 0 0.5em;
+  margin: 1rem 0;
+`;
+
+const ToDoText = styled.span`
+  display: inline-block;
+  max-width: 30rem;
+`;
+
+const ButtonBox = styled.div``;
+
+const Button = styled.button`
+  width: 4em;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #fd87f3;
+  margin: 5px 0 5px 5px;
+`;
 
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
@@ -38,29 +67,31 @@ function ToDo({ text, category, id }: IToDo) {
   };
 
   return (
-    <li>
-      <span>{text}</span>
+    <ToDoLi>
+      <ToDoText>{text}</ToDoText>
       {/* 카테고리가 DOING이 아니면 Doing 버튼을 보여준다. && 둘다 true이여야 함 */}
-      {category !== Categories.DOING && (
-        <button name={Categories.DOING + ""} onClick={onClick}>
-          Doing
-        </button>
-      )}
-      {category !== Categories.TO_DO && (
-        <button name={Categories.TO_DO + ""} onClick={onClick}>
-          To Do
-        </button>
-      )}
-      {category !== Categories.DONE && (
-        <button name={Categories.DONE + ""} onClick={onClick}>
-          Done
-        </button>
-      )}
+      <ButtonBox>
+        {category !== Categories.DOING && (
+          <Button name={Categories.DOING + ""} onClick={onClick}>
+            Doing
+          </Button>
+        )}
+        {category !== Categories.TO_DO && (
+          <Button name={Categories.TO_DO + ""} onClick={onClick}>
+            To Do
+          </Button>
+        )}
+        {category !== Categories.DONE && (
+          <Button name={Categories.DONE + ""} onClick={onClick}>
+            Done
+          </Button>
+        )}
 
-      <button name={Categories.DELETE} onClick={deleteClick}>
-        Delete
-      </button>
-    </li>
+        <Button name={Categories.DELETE} onClick={deleteClick}>
+          Delete
+        </Button>
+      </ButtonBox>
+    </ToDoLi>
   );
 }
 
