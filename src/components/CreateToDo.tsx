@@ -24,8 +24,12 @@ const Button = styled.button`
   padding: 0.8rem;
   border: none;
   background-color: transparent;
-  color: ${(props) => props.theme.accentColor};
+  color: #ff94f6;
   font-size: 1rem;
+  font-weight: bold;
+  &:hover {
+    color: #fa10e6;
+  }
 `;
 
 interface IForm {

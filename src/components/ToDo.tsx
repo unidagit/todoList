@@ -28,8 +28,11 @@ const Button = styled.button`
   padding: 8px;
   border-radius: 0.5rem;
   border: none;
-  background-color: #fd87f3;
+  background-color: #ff94f6;
   margin: 5px 0 5px 5px;
+  &:hover {
+    background-color: #fa10e6;
+  }
 `;
 
 function ToDo({ text, category, id }: IToDo) {
